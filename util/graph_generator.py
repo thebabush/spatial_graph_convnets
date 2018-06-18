@@ -1,5 +1,5 @@
 import numpy as np
-import block
+from . import block
 import torch
 import scipy.sparse as sp
 
