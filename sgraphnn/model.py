@@ -123,15 +123,23 @@ class Graph_OurConvNet(nn.Module):
     Neural network model.
     """
 
-    def __init__(self, net_parameters):
+    def __init__(
+            self,
+            vocabulary_size,
+            embedding_size,
+            nb_clusters_target,
+            nb_hidden_layers,
+            output_size,
+            verbose=False,
+        ):
         super(Graph_OurConvNet, self).__init__()
 
         # parameters
-        Voc = net_parameters['Voc']
-        D = net_parameters['D']
-        nb_clusters_target = net_parameters['nb_clusters_target']
-        H = net_parameters['H']
-        L = net_parameters['L']
+        Voc = vocabulary_size
+        D = embedding_size
+        nb_clusters_target = nb_clusters_target
+        H = nb_hidden_layers
+        L = output_size
 
         # vector of hidden dimensions
         net_layers = []
@@ -161,9 +169,9 @@ class Graph_OurConvNet(nn.Module):
         self.init_weights_Graph_OurConvNet(Voc,D,Hfinal,nb_clusters_target,1)
 
         # print
-        print('\nnb of hidden layers=',L)
-        print('dim of layers (w/ embed dim)=',net_layers_extended)
-        print('\n')
+        if verbose:
+            print('nb of hidden layers=',L)
+            print('dim of layers (w/ embed dim)=',net_layers_extended)
 
         # class variables
         self.L = L

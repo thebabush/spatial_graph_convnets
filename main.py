@@ -46,7 +46,7 @@ opt_parameters['decay_rate'] = 1.25
 #########################
 # Graph convnet function
 #########################
-def our_graph_convnets(task_parameters,net_parameters,opt_parameters):
+def our_graph_convnets(task_parameters, net_parameters, opt_parameters):
      # Delete existing network if exists
     try:
         del net
@@ -55,7 +55,13 @@ def our_graph_convnets(task_parameters,net_parameters,opt_parameters):
         print('No existing network to delete\n')
 
     # instantiate
-    net = sgraphnn.model.Graph_OurConvNet(net_parameters)
+    net = sgraphnn.model.Graph_OurConvNet(
+            net_parameters['Voc'],
+            net_parameters['D'],
+            net_parameters['nb_clusters_target'],
+            net_parameters['H'],
+            net_parameters['L'],
+    )
     if torch.cuda.is_available():
         net.cuda()
     print(net)
